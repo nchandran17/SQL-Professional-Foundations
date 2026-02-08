@@ -1,0 +1,17 @@
+/*
+Problem: LeetCode 1527 - Patients with a Condition
+Focus: String Pattern Matching & Data Integrity
+
+Logic: 
+The challenge is identifying a specific prefix ('DIAB1') within a space-separated string. 
+A simple '%DIAB1%' would create 'False Positives' (e.g., catching 'PREDIAB1').
+A simple 'DIAB1%' would create 'False Negatives' (e.g., missing 'SND DIAB1').
+
+Solution: Dual-pattern matching ensures we capture the prefix at the start of the string 
+OR preceded by a space.
+*/
+
+SELECT patient_id, patient_name, conditions
+FROM Patients
+WHERE conditions LIKE 'DIAB1%'
+OR conditions LIKE '% DIAB1%';
