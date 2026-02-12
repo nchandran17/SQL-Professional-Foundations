@@ -1,0 +1,29 @@
+*/ Postgre SQL LeetCode 180 Consecutive Numbers -- ATTEMPT 1
+#######
+Challenge description: Table: Logs
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| num         | varchar |
++-------------+---------+
+In SQL, id is the primary key for this table.
+id is an autoincrement column starting from 1.
+ 
+
+Find all numbers that appear at least three times consecutively.
+
+Return the result table in any order.
+
+
+########
+/*
+First Solution: 
+SELECT DISTINCT num AS ConsecutiveNums
+FROM (
+    SELECT num, num - LEAD(num) OVER(ORDER BY id) as lead_val, num - LAG(num) OVER(ORDER BY id) as lag_val
+    FROM Logs
+)
+WHERE lead_val = 0 AND lag_val = 0;
+
