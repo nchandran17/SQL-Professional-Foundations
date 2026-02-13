@@ -1,0 +1,21 @@
+/*
+Our goal is to make our query more efficient. In order to do this we need to get the computer to do less things.
+Two things we can eliminate for the computer are typecasting as well as subtraction. This attempt shows how I do that.
+*/
+
+SELECT DISTINCT num AS ConsecutiveNums
+FROM (
+    SELECT num, LEAD(num) OVER(ORDER BY id) as OneAhead, LEAD(num, 2) OVER(ORDER BY id) as TwoAhead
+    FROM logs
+)
+WHERE OneAhead = num AND TwoAhead = num;
+
+
+
+
+/*
+This method provides a much more efficient run time as the computer does not have to typecast or do subtraction.
+Over a large dataset, that could save lots of power and money.
+In addition we have made our code type agnostic. When we used subtraction, it made it so our query would only pull things that are the same number 
+three times consecutively. Now, any value that is repeated three times in a row will show up.
+*/
