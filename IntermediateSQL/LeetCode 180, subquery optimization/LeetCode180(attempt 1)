@@ -27,3 +27,10 @@ FROM (
 )
 WHERE lead_val = 0 AND lag_val = 0;
 
+
+*/##########
+This code is inefficient however. Why? If we look at our table description, we notice that num is type varchar. 
+This means SQL has to do typecasting to do the subtraction, not to mention also doing the subtraction which takes more runtime and compute power.
+Look at my attempt 2 to see how I made this significantly more efficient.
+/*
+
